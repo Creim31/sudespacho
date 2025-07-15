@@ -1,5 +1,5 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+# config/routes.yaml
+productos:
+    resource: ../src/UI/Controller/
     type: attribute
+  

@@ -1,24 +1,25 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+# config/services.yaml
 parameters:
 
 services:
     _defaults:
-        autowire: true
-        autoconfigure: true
+        autowire: true      # Permite inyección automática de dependencias
+        autoconfigure: true # Configura automáticamente tags de Symfony
 
+    # Configuración para autodetección de servicios
     App\:
         resource: '../src/'
         exclude:
-            - '../src/Domain/'
+            - '../src/Domain/'           # Excluye el dominio (no son servicios)
             - '../src/Kernel.php'
+            - '../src/Migrations/'       # Excluye migraciones si las tienes
 
-    # Configuración explícita para el servicio
-    App\Core\Application\ProductoService: ~
-    
-    # Configuración del repositorio
-    App\Core\Ports\Persistence\ProductoRepositoryInterface: 
-        '@App\Infrastructure\Persistence\DoctrineProductoRepository'
+    # Configuración explícita para interfaces e implementaciones
+    App\Core\Domain\Repository\ProductRepositoryInterface:
+        class: App\Core\Infrastructure\Persistence\Doctrine\DoctrineProductoRepository
+
+    # Registro explícito del caso de uso (requerido por el error)
+    App\Core\Application\UseCase\Product\CreateProductUseCase: ~
+
+    # Si usas otros casos de uso, regístralos igual:
+    # App\Core\Application\UseCase\Product\ListProductsUseCase: ~
