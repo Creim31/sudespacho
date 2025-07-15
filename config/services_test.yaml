@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        
+    App\Core\Application\ProductoService: ~
+    App\Core\Ports\Persistence\ProductoRepositoryInterface: 
+        class: App\Infrastructure\Persistence\DoctrineProductoRepository
