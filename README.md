@@ -18,3 +18,32 @@ PHP 8.1 o superior
     cd sudespacho
     ~~~
         
+    2. Instalar dependencias
+
+    composer install
+    npm install  # Solo si usas JavaScript/Webpack
+
+    3. Configurar entorno
+        Copia el archivo .env y ajusta las variables:
+
+            cp .env .env.local
+
+        Edita .env.local con tus datos:
+            DATABASE_URL="mysql://usuario:contraseña@127.0.0.1:3306/nombre_bd"
+            APP_ENV=dev
+            APP_SECRET=tu_clave_secreta
+
+    4. Base de datos
+        # Crear la base de datos
+        php bin/console doctrine:database:create
+
+        # Ejecutar migraciones
+        php bin/console doctrine:migrations:migrate
+
+        # Opcional: Cargar datos de prueba
+        php bin/console doctrine:fixtures:load
+
+    5. Iniciar servidor
+        symfony server:start  # Usando Symfony CLI
+
+        php -S 127.0.0.1:8000 -t public
