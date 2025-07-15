@@ -11,6 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+
+    private const ALLOWED_IVA_TYPES = ['SUPERREDUCED' => 4, 'REDUCED' => 10, 'GENERAL' => 21];
+    private const AUTH_TOKEN = 'admintoken';
+
+
     public function __construct(private ProductoService $productoService) {}
     
     #[Route('/api/productos', name: 'productos_listado', methods: ['GET'])]
@@ -25,32 +30,32 @@ class ProductController extends AbstractController
         return $this->json($resultado);
     }
 
-//    #[Route('/api/productos', name: 'productos_crear', methods: ['POST'])]
-//     public function create(Request $request,ProductService $productService): JsonResponse {
-//         // Verificar autenticación
-//         $authHeader = $request->headers->get('Authorization');
-//         if ($authHeader !== 'Bearer admintoken') {
-//             return $this->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
-//         }
+    #[Route('/api/productos', name: 'productos_crear', methods: ['POST'])]
+    public function create(Request $request): JsonResponse
+     {
+        // 1. Verificar autenticación
+        $authHeader = $request->headers->get('Authorization');
         
-//         $data = json_decode($request->getContent(), true);
-        
-//         try {
-//             $producto = $productService->createProduct(
-//                 $data['nombre'],
-//                 $data['descripcion'],
-//                 (float) $data['precio_sin_iva'],
-//                 $data['tipo_iva']
-//             );
-            
-//             return $this->json([
-//                 'id' => $producto->getId(),
-//                 'nombre' => $producto->getNombre(),
-//                 'precio_con_iva' => $producto->getPrecioConIva()
-//             ], Response::HTTP_CREATED);
-//         } catch (\InvalidArgumentException $e) {
-//             return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
-//         }
-//     }
+        if ($authHeader !== 'Bearer '.self::AUTH_TOKEN) {
+            return $this->json(
+                ['error' => 'Acceso no autorizado. Token requerido.'],
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
 
+        // 2. Verificar conexión básica
+        try {
+            return $this->json(
+                ['message' => 'Conexión exitosa. Autenticación válida.'],
+                Response::HTTP_OK
+            );
+            
+        } catch (\Exception $e) {
+            return $this->json(
+                ['error' => 'Error de conexión: '.$e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+   
 }
