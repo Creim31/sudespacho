@@ -47,3 +47,9 @@ PHP 8.1 o superior
         symfony server:start  # Usando Symfony CLI
 
         php -S 127.0.0.1:8000 -t public
+
+Comandos útiles
+    Comando	Descripción
+    php bin/console make:migration	Crear migración
+    php bin/console cache:clear	Limpiar caché
+    npm run dev	Compilar assets (Webpack)
