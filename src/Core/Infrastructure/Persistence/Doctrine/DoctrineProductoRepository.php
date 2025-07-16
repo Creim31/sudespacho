@@ -47,7 +47,7 @@ class DoctrineProductoRepository implements ProductRepositoryInterface
         
         $query = $queryBuilder
             ->select('p')
-            ->from(Producto::class, 'p')
+            ->from(Product::class, 'p')
             ->orderBy('p.fechaCreacion', 'DESC')
             ->setFirstResult(($pagina - 1) * $limite)
             ->setMaxResults($limite)
