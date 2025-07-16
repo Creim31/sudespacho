@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         backupGlobals="false"
          colors="true"
-         failOnDeprecation="true"
-         failOnNotice="true"
-         failOnWarning="true"
-         bootstrap="tests/bootstrap.php"
-         cacheDirectory=".phpunit.cache"
->
+         bootstrap="vendor/autoload.php">
     <php>
-        <ini name="display_errors" value="1" />
-        <ini name="error_reporting" value="-1" />
-        <server name="APP_ENV" value="test" force="true" />
-        <server name="SHELL_VERBOSITY" value="-1" />
-        
-        <!-- Agrega esta configuración para la base de datos -->
+        <server name="KERNEL_CLASS" value="App\Kernel"/>
         <env name="APP_ENV" value="test"/>
-    <env name="DATABASE_URL" value="mysql://creim31:TU_CONTRASEÑA_REAL@127.0.0.1:3306/dbsudespacho_test?serverVersion=mariadb-10.4.32"/>
+        <env name="DATABASE_URL" value="mysql://creim31:312503Xto@127.0.0.1:3306/sudespacho_test?serverVersion=mariadb-10.4.32"/>
     </php>
-
-    <!-- Resto de la configuración permanece igual -->
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
-    <!-- ... resto del archivo ... -->
 </phpunit>
