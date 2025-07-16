@@ -88,12 +88,12 @@ class ProductController extends AbstractController
                 JsonResponse::HTTP_BAD_REQUEST
             );
         }
-        catch (\Exception $e) {
-            return new JsonResponse(
-                ['error' => 'Server error'], 
-                JsonResponse::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+        // catch (\Exception $e) {
+        //     return new JsonResponse(
+        //         ['error' => 'Server error'], 
+        //         JsonResponse::HTTP_INTERNAL_SERVER_ERROR
+        //     );
+        // }
 
 
 

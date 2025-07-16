@@ -48,6 +48,12 @@ class Producto
         $this->fechaCreacion = new \DateTimeImmutable();
         $this->fechaActualizacion = new \DateTimeImmutable();
     }
+    
+    #[ORM\PreUpdate]
+    public function updateTimestamp(): void
+    {
+        $this->fechaActualizacion = new \DateTimeImmutable();
+    }
 
     private function setTipoIva(string $tipoIva): void
     {
@@ -78,4 +84,5 @@ class Producto
     {
         return $this->precioConIva;
     }
+
 }
