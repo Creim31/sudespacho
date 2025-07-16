@@ -1,7 +1,14 @@
 services:
     _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false  # Mejor performance, a menos que necesites public
+
+    # Sobrescribe solo los servicios necesarios para testing
+    App\Core\Ports\Persistence\ProductoRepositoryInterface:
+        class: App\Core\Infrastructure\Persistence\Doctrine\DoctrineProductRepository
+
+    # Si usas mocks en algunos tests
+    test.App\Core\Application\ProductoService:
+        class: App\Core\Application\ProductoService
         public: true
-        
-    App\Core\Application\ProductoService: ~
-    App\Core\Ports\Persistence\ProductoRepositoryInterface: 
-        class: App\Infrastructure\Persistence\DoctrineProductoRepository
