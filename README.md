@@ -1,4 +1,4 @@
-📦 Sudespacho - Proyecto Symfony
+Sudespacho - Proyecto Symfony
 (Breve descripción de tu proyecto)
 
 🚀 Requisitos
@@ -8,6 +8,21 @@ PHP 8.1 o superior
     Symfony CLI (opcional)
     Base de datos (MySQL/MariaDB)
 
+📦 Carpetas
+
+    src/
+    ├── Core/
+    │   ├── Application/        # Lógica de aplicación
+    │   │   └── UseCases/       # Casos de uso que orquestan el flujo de la aplicación
+    │   ├── Domain/             # Entidades y reglas de negocio
+    │   │   ├── Model           # Entidades, value objects, agregados
+    │   │   └── Repository      # Interfaces de repositorios (puertos)
+    │   └── Infrastructure/     # Implementaciones concretas
+    │        └── Persistence/   # Implementaciones de repositorios (Doctrine, etc.)
+    ├── UI/                     # Capa de interfaz de usuario
+    │   └── Controller/         # Controladores HTTP (adaptadores primarios)
+    tests/                      # Pruebas automatizadas
+     └── ControllerTest/  
 
 🛠 Instalación
 
