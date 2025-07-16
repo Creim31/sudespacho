@@ -25,7 +25,7 @@ PHP 8.1 o superior
     3. Configurar entorno
         Copia el archivo .env y ajusta las variables:
 
-            cp .env .env.local
+            cp .env .env.test
 
         Edita .env con tus datos:
             DATABASE_URL="mysql://usuario:contraseña@127.0.0.1:3306/dbsudespacho?serverVersion=mariadb-10.4.32&charset=utf8mb4"
@@ -73,7 +73,7 @@ PHP 8.1 o superior
             Accept: application/json
     
     7. Ejecutar pruebas unitarias 
-    
+
         cd sudespach
         ./vendor/bin/phpunit tests/Controller/ProductControllerTest.php
 
