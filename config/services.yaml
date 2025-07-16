@@ -19,7 +19,7 @@ services:
         class: App\Core\Infrastructure\Persistence\Doctrine\DoctrineProductoRepository
 
     # Registro explícito del caso de uso (requerido por el error)
-    App\Core\Application\UseCase\Product\CreateProductUseCase: ~
+    App\Core\Application\UseCase\CreateProductUseCase: ~
 
     # Si usas otros casos de uso, regístralos igual:
     # App\Core\Application\UseCase\Product\ListProductsUseCase: ~

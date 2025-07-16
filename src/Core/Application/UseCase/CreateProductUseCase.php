@@ -1,6 +1,6 @@
 <?php
 // src/Core/Application/UseCase/Product/CreateProductUseCase.php
-namespace App\Core\Application\UseCase\Product;
+namespace App\Core\Application\UseCase;
 
 use App\Core\Domain\Model\Product;
 use App\Core\Domain\Repository\ProductRepositoryInterface;

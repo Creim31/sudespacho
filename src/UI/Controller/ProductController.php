@@ -2,7 +2,8 @@
 // src/UI/Controller/ProductController.php
 namespace App\UI\Controller;
 
-use App\Core\Application\UseCase\Product\CreateProductUseCase;
+use App\Core\Application\UseCase\CreateProductUseCase;
+use App\Core\Application\UseCase\ListarProductosUseCase;
 use App\UI\Request\CreateProductRequest;
 use App\UI\Response\ProductResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     public function __construct(
-        private CreateProductUseCase $useCase
+        private CreateProductUseCase $useCase,
+        private ListarProductosUseCase $useCaseList
     ) {}
 
+
+    #[Route('/', name: 'listado_productos', methods: ['GET'])]
+    public function listar(Request $request): JsonResponse
+    {
+        $pagina = (int)$request->query->get('pagina', 1);
+        $limite = (int)$request->query->get('limite', 10);
+
+        // Validación básica de parámetros
+        if ($pagina < 1) $pagina = 1;
+        if ($limite < 1 || $limite > 100) $limite = 10;
+
+        $resultado = $this->useCaseList->executeList($pagina, $limite);
+        // $resultado = $this->productoService->obtenerTodosProductos($pagina, $limite);
+
+        return $this->json($resultado);
+    }
 
     #[Route('', name: 'create_product', methods: ['POST'])]
     public function createProduct(Request $request): JsonResponse {
@@ -70,12 +88,12 @@ class ProductController extends AbstractController
                 JsonResponse::HTTP_BAD_REQUEST
             );
         }
-        // catch (\Exception $e) {
-        //     return new JsonResponse(
-        //         ['error' => 'Server error'], 
-        //         JsonResponse::HTTP_INTERNAL_SERVER_ERROR
-        //     );
-        // }
+        catch (\Exception $e) {
+            return new JsonResponse(
+                ['error' => 'Server error'], 
+                JsonResponse::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
 
 
 

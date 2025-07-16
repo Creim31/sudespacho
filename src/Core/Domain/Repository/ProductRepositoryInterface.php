@@ -9,4 +9,7 @@ interface ProductRepositoryInterface
     public function save(Product $product): void;
     public function searchByName(string $name, int $page, int $limit): array;
     public function findById(int $id): ?Product; 
+    public function findAllPaginated(int $pagina, int $limite): array;
+    public function countAll(): int; // ← Añadido
+
 }
