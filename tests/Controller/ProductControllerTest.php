@@ -5,25 +5,25 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ProductControllerTest extends WebTestCase
 {
-    // public function testListadoProductos(): void
-    // {
-    //     $client = static::createClient();
-    //     $client->followRedirects(); // Sigue las redirecciones automáticamente
+    public function testListadoProductos(): void
+    {
+        $client = static::createClient();
+        $client->followRedirects(); // Sigue las redirecciones automáticamente
         
-    //     $client->request(
-    //         'GET', 
-    //         '/api/productos',
-    //         [],
-    //         [],
-    //         ['HTTP_ACCEPT' => 'application/json']
-    //     );
+        $client->request(
+            'GET', 
+            '/api/productos',
+            [],
+            [],
+            ['HTTP_ACCEPT' => 'application/json']
+        );
         
-    //     // Muestra información de depuración
-    //     echo "Status Code: ".$client->getResponse()->getStatusCode()."\n";
-    //     echo "Response: ".$client->getResponse()->getContent()."\n";
+        // Muestra información de depuración
+        echo "Status Code: ".$client->getResponse()->getStatusCode()."\n";
+        echo "Response: ".$client->getResponse()->getContent()."\n";
         
-    //     $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    // }
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 
  public function testCrearProductoExitoso(): void
 {
